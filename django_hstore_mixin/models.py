@@ -1,6 +1,7 @@
 import datetime
 import json
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django_hstore import hstore
 
@@ -20,6 +21,19 @@ class HstoreMixin(models.Model):
 
     class Meta:
         abstract = True
+
+    def clean(self):
+        """ Ensure that all Hstore data is stored as valid JSON.
+        NOTE: By default, this is not called automatically when you call
+        save() method. """
+        for key, value in self._data.items():
+            try:
+                json.loads(value)
+            except ValueError:
+                msg = "The value of key \"%s\" does not appear to be valid JSON: %s. " % (key, value)
+                msg += "Hstore values must be stored as JSON.  Maybe you meant to use %s?" % json.dumps(value)
+                raise ValidationError(msg)
+        return super(HstoreMixin, self).clean()
 
     @property
     def data(self):
