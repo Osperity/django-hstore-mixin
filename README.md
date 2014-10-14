@@ -21,7 +21,7 @@ into DB but will not be deserialized upon retrieval._
 
 2. Install `django-hstore-mixin`:
 
-    -e git+git@bitbucket.org:ospreyinformatics/django-hstore-mixin.git@v1.0.0#egg=django_hstore_mixin
+    `-e git+git@bitbucket.org:ospreyinformatics/django-hstore-mixin.git@[VERSION_TAG]#egg=django_hstore_mixin`
 
 3. That's about it, no need to touch your `INSTALLED_APPS`.  Just import and use the mixin as needed!
 
