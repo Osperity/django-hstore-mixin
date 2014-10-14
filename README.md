@@ -1,15 +1,15 @@
 # Django Hstore Mixin
 
-Mixin to allow usage of Django Hstore whilst maintaining common Python
+Mixin to allow usage of `django-hstore` whilst maintaining common Python
 data types.
 
 ## Introduction
 
-This is an add-on for the [`django-hstore` library](https://github.com/djangonauts/django-hstore).  While the `django-hstore` 
+This is an add-on for the [`django-hstore`](https://github.com/djangonauts/django-hstore) library.  While the `django-hstore` 
 library does many amazing things, it suffers from the fact that does not maintain many datatypes (unless the newer `schema mode`
 is used, which is somewhat of a manual process).  This is due to the fact that Postgresql can only store values as `String` objects.
 
-To get around this limitation, the Django Hstore Mixin creates a `property` on a model that acts as a proxy for the `django-hstore`
+To get around this limitation, the `django-hstore-mixin` creates a `property` on a model that acts as a proxy for the `django-hstore`
 field.  Anything put into this field is serialized to JSON on input and deserialized from JSON on retrieval.
 
 _Note: Datetime objects will be serialized to ISO Format upon entrance
@@ -27,7 +27,7 @@ into DB but will not be deserialized upon retrieval._
 
 ## Usage
 
-To use the `Django Hstore Mixin`, simply import the HstoreMixin and use it in a model's base.
+To use the `django-hstore-mixin`, simply import the HstoreMixin and use it in a model's base.
 
     from django_hstore_mixin.models import HstoreMixin
 
@@ -130,5 +130,3 @@ More details here on link: http://clarkdave.net/2012/09/postgresql-error-type-hs
 The preferred way to make a contribution to the `django-hstore-mixin` is by forking the repo, making changes, and then opening a [Pull Request](pull-requests).
 
 The preferred way to raise attention to a bug/issue is by opening an [Issue](issues).
-
-
