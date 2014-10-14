@@ -15,7 +15,9 @@ class HstoreMixin(models.Model):
     deserializes data upon setting/getting. """
     _data = hstore.DictionaryField(
         'KeyValueStore',
-        db_index=True, default={}
+        db_index=True,
+        default={},
+        blank=True
     )
     objects = hstore.HStoreManager()
 
