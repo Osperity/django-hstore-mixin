@@ -17,7 +17,8 @@ class HstoreMixin(models.Model):
         'KeyValueStore',
         db_index=True,
         default={},
-        blank=True
+        blank=True,
+        null=True
     )
     objects = hstore.HStoreManager()
 
