@@ -62,3 +62,9 @@ class JsonDict(dict):
 
     def items(self):
         return [(k, json.loads(v)) for k, v in super(JsonDict, self).items()]
+
+    def update(self, other):
+        # This is pretty ugly.
+        dict_self = dict(self)
+        dict_self.update(serializeDict(other))
+        self._modelInstance._data = dict_self

@@ -125,3 +125,17 @@ class TestHstoreMixin(TestCase):
         f = form(data=self.instance.__dict__)
         f.full_clean()
         self.assertEqual(f.errors, {})
+
+    def test_update_data(self):
+        """ Ensure update works as expected """
+        self.instance.data.update({'int': 2000})
+        self.assertEqual(
+            self.instance.data,
+            dict(
+                int=2000,
+                string='foo',
+                date=self.now.isoformat(),
+                list=[1, 'two'],
+                dict=dict(a=1)
+            )
+        )
