@@ -1,6 +1,4 @@
-import json
-
-from django_hstore_mixin.serializers import serializeItem, serializeDict
+from django_hstore_mixin.serializers import deserializeValue, serializeValue, serializeDict
 
 
 class JsonDict(dict):
@@ -15,7 +13,7 @@ class JsonDict(dict):
 
     def __setitem__(self, k, v):
         # Serialize value being set
-        super(JsonDict, self).__setitem__(k, serializeItem(v))
+        super(JsonDict, self).__setitem__(k, serializeValue(v))
 
         # You can't use __setitem__ on a @property (ie. "e.data['foo'] = 1"
         # will return e._data as an object which then gets updated, but those
@@ -25,11 +23,11 @@ class JsonDict(dict):
 
     def __getitem__(self, key):
         # Deserialize on 'get'
-        return json.loads(super(JsonDict, self).__getitem__(key))
+        return deserializeValue(super(JsonDict, self).__getitem__(key))
 
     def __getattr__(self, key):
         # Deserialize on 'get'
-        return json.loads(super(JsonDict, self).__getattr__(key))
+        return deserializeValue(super(JsonDict, self).__getattr__(key))
 
     def __repr__(self):
         # Deserialize values for reproduction
@@ -58,11 +56,11 @@ class JsonDict(dict):
 
         # Only deserialize if value was pulled from dict
         if value and value != default:
-            value = json.loads(value)
+            value = deserializeValue(value)
         return value
 
     def items(self):
-        return [(k, json.loads(v)) for k, v in super(JsonDict, self).items()]
+        return [(k, deserializeValue(v)) for k, v in super(JsonDict, self).items()]
 
     def update(self, other):
         # This is pretty ugly.
