@@ -6,7 +6,7 @@ from django.db import models
 from django_hstore import hstore
 
 from django_hstore_mixin.data_types import JsonDict
-from django_hstore_mixin.serializers import toJson
+from django_hstore_mixin.serializers import serializeDict
 
 
 class HstoreMixin(models.Model):
@@ -47,6 +47,6 @@ class HstoreMixin(models.Model):
     def data(self, value):
         """ Encode data to JSON """
         if not self._data:
-            self._data = {k: toJson(v) for k, v in value.items()}
+            self._data = serializeDict(value)
         else:
             self._data = JsonDict(value, modelInstance=self)

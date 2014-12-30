@@ -1,6 +1,6 @@
 import json
 
-from django_hstore_mixin.serializers import toJson
+from django_hstore_mixin.serializers import serializeItem, serializeDict
 
 
 class JsonDict(dict):
