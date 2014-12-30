@@ -7,8 +7,9 @@ class JsonDict(dict):
     """ A dict-like object where all values are serialized to and from
     JSON upon setting and getting, allowing it to be stored in and
     retrieved from Hstore field while maintaining original type. """
-    def __init__(self, data, modelInstance, *args, **kwargs):
+    def __init__(self, data, modelInstance, datafield='_data', *args, **kwargs):
         self._modelInstance = modelInstance
+        self._datafield = datafield
         data = data or {}  # Avoid data being NoneType
         super(JsonDict, self).__init__(data, *args, **kwargs)
 
@@ -20,7 +21,7 @@ class JsonDict(dict):
         # will return e._data as an object which then gets updated, but those
         # updates won't make their way back to the db).  As such, we must
         # update the db field hiding behind the property manually.
-        self._modelInstance._data = self.copy()
+        setattr(self._modelInstance, self._datafield, self.copy())
 
     def __getitem__(self, key):
         # Deserialize on 'get'
@@ -67,4 +68,4 @@ class JsonDict(dict):
         # This is pretty ugly.
         dict_self = dict(self)
         dict_self.update(serializeDict(other))
-        self._modelInstance._data = dict_self
+        setattr(self._modelInstance, self._datafield, dict_self)
