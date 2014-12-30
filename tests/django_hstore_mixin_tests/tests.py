@@ -77,14 +77,25 @@ class TestHstoreMixin(TestCase):
 
     def test_comparison(self):
         """ Ensure data is compares in a deserialized form """
-        self.assertTrue(
-            self.instance.data == dict(
+        self.assertEqual(
+            self.instance.data,
+            dict(
                 int=1,
                 string='foo',
                 date=self.now.isoformat(),
                 list=[1, 'two'],
                 dict={'a': 1}
             )
+        )
+        self.assertEqual(
+            dict(
+                int=1,
+                string='foo',
+                date=self.now.isoformat(),
+                list=[1, 'two'],
+                dict={'a': 1}
+            ),
+            self.instance.data
         )
 
     def test_validation(self):
