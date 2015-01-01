@@ -46,7 +46,4 @@ class HstoreMixin(models.Model):
     @data.setter
     def data(self, value):
         """ Encode data to JSON """
-        if not self._data:
-            self._data = serializeDict(value)
-        else:
-            self._data = JsonDict(value, modelInstance=self)
+        self._data = serializeDict(value) if value else {}
