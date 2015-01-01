@@ -14,6 +14,7 @@ def serializeDict(d):
     return {k: serializeValue(v) for k, v in d.items()}
 
 def deserializeValue(v):
+    """ Deserialize single value from JSON string format """
     try:
         return json.loads(v)
     except ValueError:

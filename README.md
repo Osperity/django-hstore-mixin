@@ -121,10 +121,7 @@ class MyModel(models.Model):
     @myfield.setter
     def myfield(self, value):
         """ Encode myfield to JSON """
-        if not self._myfield:
-          self._myfield = serializeDict(value)
-        else:
-          self._myfield = JsonDict(value, modelInstance=self, datafield='_myfield')
+        self._myfield = serializeDict(value) if value else {}
 
 ```
 
