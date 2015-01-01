@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.forms.models import modelform_factory
 from django.test import TestCase
 
-from django_hstore_mixin_tests.models import TestModel
+from .models import TestModel
 
 
 class TestHstoreMixin(TestCase):
