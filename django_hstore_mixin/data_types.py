@@ -1,6 +1,9 @@
 from django_hstore_mixin.serializers import deserializeValue, serializeValue, serializeDict
 
 
+__all__ = ('JsonDict',)
+
+
 class JsonDict(dict):
     """ A dict-like object where all values are serialized to and from
     JSON upon setting and getting, allowing it to be stored in and

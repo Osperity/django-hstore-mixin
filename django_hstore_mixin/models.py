@@ -5,6 +5,9 @@ from django_hstore import hstore
 from .data_types import JsonDict
 
 
+__all__ = ('HstoreMixin',)
+
+
 class HstoreMixin(models.Model):
     """ Data field to be added to model to enable Hstore field. Actual
     hstore field hidden with underscore, property field serializes and
