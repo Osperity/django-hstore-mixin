@@ -109,7 +109,6 @@ a property interface in a manner like so:
 from django.db import models
 from django_hstore import hstore
 from django_hstore_mixin.data_types import JsonDict
-from django_hstore_mixin.serializers import serializeDict
 
 class MyModel(models.Model):
     _myfield = hstore.DictionaryField('A dictionary field not named "data"')  # Hidden by prepending with an underscore
@@ -121,7 +120,7 @@ class MyModel(models.Model):
     @myfield.setter
     def myfield(self, value):
         """ Encode myfield to JSON """
-        self._myfield = serializeDict(value) if value else {}
+        self._myfield = JsonDict.serializeDict(value) if value else {}
 
 ```
 
