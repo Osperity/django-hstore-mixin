@@ -19,7 +19,7 @@ class JsonDict(dict):
         # will return e._data as an object which then gets updated, but those
         # updates won't make their way back to the db).  As such, we must
         # update the db field hiding behind the property manually.
-        setattr(self._modelInstance, self._datafield, self.copy())
+        self._apply_to_field(dict(self))
 
     def __getitem__(self, key):
         # Deserialize on 'get'
@@ -51,6 +51,10 @@ class JsonDict(dict):
     def __ge__(self, other):
         return {k: v for k, v in self.items()} <= other
 
+    def _apply_to_field(self, dictionary):
+        """ Apply value to underlying hstore field """
+        setattr(self._modelInstance, self._datafield, dictionary)
+
     def get(self, key, default=None):
         value = super(JsonDict, self).get(key, default)
 
@@ -66,7 +70,7 @@ class JsonDict(dict):
         # This is pretty ugly.
         dict_self = dict(self)
         dict_self.update(serializeDict(other))
-        setattr(self._modelInstance, self._datafield, dict_self)
+        self._apply_to_field(dict_self)
 
     @staticmethod
     def deserializeValue(value):
