@@ -1,7 +1,3 @@
-from django.db import models
-from django.conf import settings
-from django import get_version
-
 from django_hstore_mixin.models import HstoreMixin
 
 # determine if geodjango is in use
