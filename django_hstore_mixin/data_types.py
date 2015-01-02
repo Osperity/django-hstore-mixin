@@ -67,3 +67,18 @@ class JsonDict(dict):
         dict_self = dict(self)
         dict_self.update(serializeDict(other))
         setattr(self._modelInstance, self._datafield, dict_self)
+
+    @staticmethod
+    def deserializeValue(value):
+        """ Convenience method to provide interface to deserializeValue tooling """
+        return deserializeValue(value)
+
+    @staticmethod
+    def serializeValue(value):
+        """ Convenience method to provide interface to serializeValue tooling """
+        return serializeValue(value)
+
+    @staticmethod
+    def serializeDict(dictionary):
+        """ Convenience method to provide interface to serializeDict tooling """
+        return serializeDict(dictionary)
