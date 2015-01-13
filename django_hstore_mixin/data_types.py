@@ -69,6 +69,14 @@ class JsonDict(dict):
     def items(self):
         return [(k, deserializeValue(v)) for k, v in super(JsonDict, self).items()]
 
+    def iteritems(self):
+        for (k, v) in super(JsonDict, self).iteritems():
+            yield (k, deserializeValue(v))
+
+    def itervalues(self):
+        for v in super(JsonDict, self).itervalues():
+            yield deserializeValue(v)
+
     def update(self, other):
         # This is pretty ugly.
         dict_self = dict(self)
