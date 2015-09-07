@@ -1,5 +1,7 @@
 # Django Hstore Mixin
 
+**DEPRECATED: Note that this repo is now deprecated in favor of [Django-Hstore's](https://github.com/djangonauts/django-hstore) [SerializedField](https://github.com/djangonauts/django-hstore/pull/80).**
+
 Mixin to allow usage of `django-hstore` whilst maintaining common Python
 data types.
 
